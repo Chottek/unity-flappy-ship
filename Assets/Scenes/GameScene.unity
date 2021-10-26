@@ -212,6 +212,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2415551594754751520, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_Size.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751521, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751521, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751522, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_Name
+      value: pfPipeBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751523, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_Size.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751523, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751523, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415551594754751523, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5499739515284377228, guid: abebc80061f29ee449c29e90200001ba, type: 3}
       propertyPath: m_Name
       value: PipeBody
@@ -430,6 +462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5fce8287a83df40a7ed6c2adeeb09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &509208010 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2415551594754751521, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+  m_PrefabInstance: {fileID: 94555868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +593,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da73e6abaf206f04d8131faad8d8a07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1227208808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6490122436817225201, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
+  m_PrefabInstance: {fileID: 2111259086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1757918517
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,8 +642,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipeHeadSprite: {fileID: 0}
-  pfPipeHead: {fileID: 6415861324074654280, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
-  pfPipeBody: {fileID: 5499739515284377234, guid: abebc80061f29ee449c29e90200001ba, type: 3}
+  pfPipeHead: {fileID: 1227208808}
+  pfPipeBody: {fileID: 509208010}
 --- !u!1001 &2111259086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -657,9 +699,25 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6415861324074654281, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415861324074654281, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6415861324074654286, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
       propertyPath: m_Name
       value: PipeHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 6490122436817225201, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6490122436817225203, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
+      propertyPath: m_Name
+      value: pfPipeHead
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
