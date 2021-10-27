@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
     private const float PIPE_MOVE_SPEED = 30f;
     private const float PIPE_DESTROY_X_POS = -100f;
     private const float PIPE_SPAWN_X_POS = 100f;
+    private const float SHIP_X_POS = 0f;
 
     private static Level instance;
 
@@ -18,6 +19,7 @@ public class Level : MonoBehaviour
     }
 
     private List<Pipe> pipeList;
+    private int pipesPassedCount;
     private int pipeCounter;
     private float pipeSpawnTimer;
     private float pipeSpawnDelay;
@@ -34,6 +36,8 @@ public class Level : MonoBehaviour
         instance = this;
         pipeList = new List<Pipe>();
         SetDifficulty(Difficulty.Easy);
+        pipesPassedCount = 0;
+        pipeCounter = 0;
     }
 
     private void Start() {
@@ -63,7 +67,11 @@ public class Level : MonoBehaviour
     private void HandlePipeMovement() {
         for(int i = 0; i < pipeList.Count; i++) {
             Pipe p = pipeList[i];
+            bool isRightOfShip = p.GetXPos() > SHIP_X_POS;
             p.Move();
+            if(isRightOfShip && p.GetXPos() <= SHIP_X_POS){
+                pipesPassedCount++;
+            }
             if (p.GetXPos() < PIPE_DESTROY_X_POS) {
                 p.DestroyThis();
                 pipeList.Remove(p);
@@ -138,6 +146,10 @@ public class Level : MonoBehaviour
 
     public int GetPipeCount() {
         return pipeCounter;
+    }
+
+    public int GetPipesPassedCount() {
+        return pipesPassedCount;
     }
 
     /**
