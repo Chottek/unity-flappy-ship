@@ -11,6 +11,12 @@ public class Level : MonoBehaviour
     private const float PIPE_DESTROY_X_POS = -100f;
     private const float PIPE_SPAWN_X_POS = 100f;
 
+    private static Level instance;
+
+    public static Level GetInstance() {
+        return instance;
+    }
+
     private List<Pipe> pipeList;
     private int pipeCounter;
     private float pipeSpawnTimer;
@@ -25,6 +31,7 @@ public class Level : MonoBehaviour
     }
 
     private void Awake() {
+        instance = this;
         pipeList = new List<Pipe>();
         SetDifficulty(Difficulty.Easy);
     }
@@ -127,6 +134,10 @@ public class Level : MonoBehaviour
         CreatePipe(CAMERA_ORTHO_SIZE * 2f - gapY - gapSize / 2f, xPosition, false);
         pipeCounter++;
         SetDifficulty(GetDifficulty());
+    }
+
+    public int GetPipeCount() {
+        return pipeCounter;
     }
 
     /**
