@@ -35,6 +35,7 @@ public class Level : MonoBehaviour
     }
 
      private enum State {
+        WaitingToStart,
         Playing,
         ShipDown
     }
@@ -43,17 +44,21 @@ public class Level : MonoBehaviour
         instance = this;
         pipeList = new List<Pipe>();
         SetDifficulty(Difficulty.Easy);
-        state = State.Playing;
+        state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
     }
 
     private void Start() {
         Ship.GetInstance().OnDeath += Ship_OnDeath;
+        Ship.GetInstance().OnStartedPlaying += Level_OnStartedPlaying;
+    }
+
+    private void Level_OnStartedPlaying(object sender, System.EventArgs e){
+        state = State.Playing;
     }
 
     private void Ship_OnDeath(object sender, System.EventArgs e){
-        Debug.Log("Dead");
         state = State.ShipDown;
     }
 

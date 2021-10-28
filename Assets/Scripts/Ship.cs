@@ -14,17 +14,45 @@ public class Ship : MonoBehaviour {
     }
 
     public event EventHandler OnDeath;
+    public event EventHandler OnStartedPlaying;
 
     private Rigidbody2D shipRigidbody2D;
+
+    private State state;
+
+    private enum State {
+        WaitingToStart,
+        Flying,
+        Down
+    }
 
     private void Awake() {
         instance = this;
         shipRigidbody2D = GetComponent<Rigidbody2D>();
+        shipRigidbody2D.bodyType = RigidbodyType2D.Static;
+        state = State.WaitingToStart;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-            Jump();
+        switch (state) {
+            default:
+            case State.WaitingToStart:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
+                    state = State.Flying;
+                    shipRigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+                    Jump();
+                    if (OnStartedPlaying != null) {
+                        OnStartedPlaying(this, EventArgs.Empty);
+                    }
+                }
+                break;
+            case State.Flying:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
+                    Jump();
+                }
+                break;
+            case State.Down:
+                break;
         }
     }
 
