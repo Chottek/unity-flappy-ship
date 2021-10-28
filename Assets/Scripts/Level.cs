@@ -25,6 +25,8 @@ public class Level : MonoBehaviour
     private float pipeSpawnDelay;
     private float gapSize;
 
+    private State state;
+
     public enum Difficulty {
         Easy,
         Medium,
@@ -32,21 +34,34 @@ public class Level : MonoBehaviour
         Possiblent
     }
 
+     private enum State {
+        Playing,
+        ShipDown
+    }
+
     private void Awake() {
         instance = this;
         pipeList = new List<Pipe>();
         SetDifficulty(Difficulty.Easy);
+        state = State.Playing;
         pipesPassedCount = 0;
         pipeCounter = 0;
     }
 
     private void Start() {
-        
+        Ship.GetInstance().OnDeath += Ship_OnDeath;
+    }
+
+    private void Ship_OnDeath(object sender, System.EventArgs e){
+        Debug.Log("Dead");
+        state = State.ShipDown;
     }
 
     private void Update() {
-       HandlePipeMovement();
-       HandlePipeSpawning();
+        if (state == State.Playing) {
+            HandlePipeMovement();
+            HandlePipeSpawning();
+        }
     }
 
     private void HandlePipeSpawning() {
@@ -104,28 +119,33 @@ public class Level : MonoBehaviour
 
         BoxCollider2D pipeBodyBoxCollider = pipeBody.GetComponent<BoxCollider2D>();
         pipeBodyBoxCollider.size = new Vector2(PIPE_WIDTH, height);
-        pipeBodyBoxCollider.offset = new Vector2(xPosition, height / 2f);
+        pipeBodyBoxCollider.offset = new Vector2(0f, height / 2f);
 
         pipeList.Add(new Pipe(pipeHead, pipeBody));
     }
 
     private void SetDifficulty(Difficulty difficulty) {
+          BackgroundScroll backgroundScroll = BackgroundScroll.GetInstance();
           switch(difficulty){
                 case Difficulty.Easy: 
+                    backgroundScroll.SetScrollSpeed(0.1f);
                     gapSize = 50f; 
-                    pipeSpawnDelay = 1.2f;
+                    pipeSpawnDelay = 1.7f;
                     break;
                 case Difficulty.Medium: 
+                    backgroundScroll.SetScrollSpeed(0.13f);
                     gapSize = 40f; 
-                     pipeSpawnDelay = 1.1f;
+                    pipeSpawnDelay = 1.5f;
                     break;
                 case Difficulty.Hard: 
+                    backgroundScroll.SetScrollSpeed(0.15f);
                     gapSize = 33f; 
-                     pipeSpawnDelay = 1f;
+                    pipeSpawnDelay = 1.2f;
                     break;
                 case Difficulty.Possiblent:
+                    backgroundScroll.SetScrollSpeed(0.17f);
                     gapSize = 27f;
-                     pipeSpawnDelay = 0.9f;
+                    pipeSpawnDelay = 1f;
                     break;
           }
     }
@@ -149,7 +169,7 @@ public class Level : MonoBehaviour
     }
 
     public int GetPipesPassedCount() {
-        return pipesPassedCount;
+        return pipesPassedCount / 2; //for score counting purposes
     }
 
     /**
