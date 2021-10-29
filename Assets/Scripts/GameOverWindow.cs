@@ -12,7 +12,7 @@ public class GameOverWindow : MonoBehaviour {
 		scoreText = transform.Find("scoreText").GetComponent<Text>();
 
 		transform.Find("retryBtn").GetComponent<UI_Btn>().ClickFunc = () => {
-			UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+			Loader.Load(Loader.Scene.GameScene);
 		};
 	}
 
