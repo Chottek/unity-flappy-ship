@@ -1203,6 +1203,13 @@ MonoBehaviour:
   pipeHeadSprite: {fileID: 0}
   pfPipeHead: {fileID: 1227208808}
   pfPipeBody: {fileID: 509208010}
+  soundAudioClips:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 527f694e51a5594458cdf7dc496809bd, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: 870716baabe4899488b4bd9a271b96c3, type: 3}
+  - sound: 2
+    audioClip: {fileID: 8300000, guid: 10970d59e93210c40a00c09ff6758e75, type: 3}
 --- !u!1 &1887671450
 GameObject:
   m_ObjectHideFlags: 0

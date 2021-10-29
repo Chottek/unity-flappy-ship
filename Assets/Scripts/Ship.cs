@@ -58,6 +58,7 @@ public class Ship : MonoBehaviour {
 
     private void Jump() {
         shipRigidbody2D.velocity = Vector2.up * JUMP_AMOUNT;
+        SoundManager.PlaySound(SoundManager.Sound.Jump);
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
