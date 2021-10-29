@@ -14,6 +14,10 @@ public class GameOverWindow : MonoBehaviour {
 		transform.Find("retryBtn").GetComponent<UI_Btn>().ClickFunc = () => {
 			Loader.Load(Loader.Scene.GameScene);
 		};
+
+		transform.Find("backBtn").GetComponent<UI_Btn>().ClickFunc = () => {
+			Loader.Load(Loader.Scene.MainMenuScene);
+		};
 	}
 
 	private void Start() {
