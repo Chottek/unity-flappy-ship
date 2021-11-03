@@ -34,7 +34,7 @@ public class Level : MonoBehaviour
         Possiblent
     }
 
-     private enum State {
+     public enum State {
         WaitingToStart,
         Playing,
         ShipDown
@@ -132,25 +132,20 @@ public class Level : MonoBehaviour
     }
 
     private void SetDifficulty(Difficulty difficulty) {
-          BackgroundScroll backgroundScroll = BackgroundScroll.GetInstance();
           switch(difficulty){
                 case Difficulty.Easy: 
-                    backgroundScroll.SetScrollSpeed(0.1f);
                     gapSize = 50f; 
                     pipeSpawnDelay = 1.7f;
                     break;
                 case Difficulty.Medium: 
-                    backgroundScroll.SetScrollSpeed(0.13f);
                     gapSize = 40f; 
                     pipeSpawnDelay = 1.5f;
                     break;
                 case Difficulty.Hard: 
-                    backgroundScroll.SetScrollSpeed(0.15f);
                     gapSize = 33f; 
                     pipeSpawnDelay = 1.2f;
                     break;
                 case Difficulty.Possiblent:
-                    backgroundScroll.SetScrollSpeed(0.17f);
                     gapSize = 27f;
                     pipeSpawnDelay = 1f;
                     break;
@@ -177,6 +172,10 @@ public class Level : MonoBehaviour
 
     public int GetPipesPassedCount() {
         return pipesPassedCount / 2; //for score counting purposes
+    }
+
+    public State GetState() {
+        return state;
     }
 
     /**

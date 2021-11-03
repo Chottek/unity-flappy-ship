@@ -9,9 +9,14 @@ public class ScoreWindow : MonoBehaviour {
 
 	private void Awake() {
 		scoreText = transform.Find("scoreText").GetComponent<Text>();
+		scoreText.gameObject.SetActive(false);
 	}
 
 	private void Update() {
+		if(Level.GetInstance().GetState() == Level.State.Playing){
+			scoreText.gameObject.SetActive(true);
+		}
+
 		scoreText.text = Level.GetInstance().GetPipesPassedCount().ToString();
 	}
 
