@@ -59,12 +59,22 @@ public class Ship : MonoBehaviour {
     private void Jump() {
         shipRigidbody2D.velocity = Vector2.up * JUMP_AMOUNT;
         SoundManager.PlaySound(SoundManager.Sound.Jump);
+        checkHeight();
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
         shipRigidbody2D.bodyType = RigidbodyType2D.Static;
         if (OnDeath != null) {
             OnDeath(this, EventArgs.Empty);
+        }
+    }
+
+    private void checkHeight(){
+        if(shipRigidbody2D.transform.position.y > 40){
+            //shipRigidbody2D.bodyType = RigidbodyType2D.Static;
+            if (OnDeath != null) {
+                OnDeath(this, EventArgs.Empty);
+            }
         }
     }
 }
