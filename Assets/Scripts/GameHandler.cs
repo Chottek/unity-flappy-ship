@@ -6,13 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     
     private void Start() {
-       // GameObject gameObject = new GameObject("Pipe", typeof(SpriteRenderer));
-        //gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.GetInstance().pipeHeadSprite;
+       Score.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
