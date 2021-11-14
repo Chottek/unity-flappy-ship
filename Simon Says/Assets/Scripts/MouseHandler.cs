@@ -21,6 +21,7 @@ public class MouseHandler : MonoBehaviour {
 
             if(hit.collider != null){
                 Debug.Log(hit.collider.gameObject.name);
+                hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color32(124, 252, 0, 255);
             }
         }
         
