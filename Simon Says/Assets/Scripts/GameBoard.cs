@@ -103,7 +103,7 @@ public class GameBoard : MonoBehaviour {
     }
 
     private void DeactivateLights(){
-        for(GameLight g: lights){
+        foreach(GameLight g in lights){
             g.SetInactive();
         }
         lightsOn = 0;
