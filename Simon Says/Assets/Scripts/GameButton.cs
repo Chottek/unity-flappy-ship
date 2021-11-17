@@ -8,19 +8,22 @@ public class GameButton : MonoBehaviour {
     public int index;
 
     //seconds
-    public float activeDuration = 1f;
-    public float cooldownDuration = 0.2f;
+    public float activeDuration = 0.3f;
+    public float cooldownDuration = 0.1f;
 
     private void Awake(){
         extractIndexFromName();
     }
 
-    public void OnMouseDown(){
-        Debug.Log("Clicked!");
-    }
-
     void Update(){
        
+    }
+
+    public IEnumerator PlayBlinkRoutine(){
+        setActive();
+        yield return new WaitForSeconds(activeDuration);
+        setInactive();
+        yield return new WaitForSeconds(cooldownDuration);
     }
 
     public int GetIndex(){
@@ -36,7 +39,7 @@ public class GameButton : MonoBehaviour {
     }
 
     private void setInactive(){
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 250, 250, 255);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(41, 41, 41, 255);
     }
 
    
