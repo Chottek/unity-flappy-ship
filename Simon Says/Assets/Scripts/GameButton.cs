@@ -7,39 +7,60 @@ public class GameButton : MonoBehaviour {
     [SerializeField]
     public int index;
 
-    //seconds
-    public float activeDuration = 0.3f;
-    public float cooldownDuration = 0.1f;
+    [SerializeField]
+    public GameBoard gameBoard;
+
+    private Color32 activeColor = new Color32(124, 252, 0, 255);
+    private Color32 inactiveColor = new Color32(41, 41, 41, 255);
+    private Color32 errorColor = new Color32(255, 0, 0, 255);
 
     private void Awake(){
-        extractIndexFromName();
+        ExtractIndexFromName();
+
+        gameBoard = GetComponentInParent<GameBoard>();
     }
 
     void Update(){
        
     }
 
-    public IEnumerator PlayBlinkRoutine(){
-        setActive();
-        yield return new WaitForSeconds(activeDuration);
-        setInactive();
-        yield return new WaitForSeconds(cooldownDuration);
+    public IEnumerator PlayBlinkRoutine(float active, float cooldown){
+        SetActive();
+        yield return new WaitForSeconds(active);
+        SetInactive();
+        yield return new WaitForSeconds(cooldown);
+    }
+
+    public IEnumerator PlayErrorRoutine(){
+        SetWronglyActive();
+        yield return new WaitForSeconds(0.3f);
+        SetInactive();
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    public void PlayerClick(){
+        StartCoroutine(PlayBlinkRoutine(0.1f, 0.1f));
+        gameBoard.HandleClick(index);
     }
 
     public int GetIndex(){
         return index;
     }
 
-    private void extractIndexFromName(){
+    private void ExtractIndexFromName(){
         index = int.Parse(gameObject.name.Split('_')[1]);
     }
 
-    private void setActive(){
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(124, 252, 0, 255);
+    private void SetActive(){
+        gameObject.GetComponent<SpriteRenderer>().color = activeColor;
     }
 
-    private void setInactive(){
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(41, 41, 41, 255);
+    private void SetWronglyActive(){
+        gameObject.GetComponent<SpriteRenderer>().color = errorColor;
+    }
+
+    private void SetInactive(){
+        gameObject.GetComponent<SpriteRenderer>().color = inactiveColor;
     }
 
    

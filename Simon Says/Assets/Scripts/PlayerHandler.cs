@@ -14,7 +14,7 @@ public class PlayerHandler : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
             if(hit.collider != null){
-                hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color32(124, 252, 0, 255);
+                hit.collider.gameObject.GetComponent<GameButton>().PlayerClick();
             }
         }
     }

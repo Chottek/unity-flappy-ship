@@ -15,12 +15,18 @@ public class GameBoard : MonoBehaviour {
 
     private int[] currentSequence;
     private int currentSequenceLength;
+    private int playerClicks;
+    private int nextIndexToCheck;
 
-    //[SerializeField]
-    //private List<GameButton> buttons;
+    public float buttonSequenceActiveDuration = 0.3f;
+    public float buttonSequenceCooldownDuration = 0.1f;
 
     [SerializeField]
     private GameButton[] buttons;
+
+    [SerializeField]
+    private GameLight[] lights;
+    private int lightsOn;
 
     private GameButton nextButton;
 
@@ -33,8 +39,7 @@ public class GameBoard : MonoBehaviour {
         playerHandler.SetCanType(false); //change to true later!
 
         buttons = GetComponentsInChildren<GameButton>();
-      
-        Debug.Log("Buttonz size:" + buttons.Length);
+        lights = GetComponentsInChildren<GameLight>();
     }
 
     private void Start() {
@@ -45,24 +50,67 @@ public class GameBoard : MonoBehaviour {
         currentSequence = new int[currentSequenceLength];
         for (int i = 0; i < currentSequenceLength; i++){
            currentSequence[i] = Random.Range(0, buttons.Length);
-           Debug.Log("Generated: " + i + " : " + currentSequence[i]);
         }
     }
 
     private void StartGame(){
         currentSequenceLength = startSequenceLength;
-        StartCoroutine(PlaySequenceRoutine());
+        lightsOn = 0;
+        StartCoroutine(SequenceRoutine());
     }
 
-    private IEnumerator PlaySequenceRoutine(){
+    private IEnumerator SequenceRoutine(){
         yield return new WaitForSeconds(sequenceDelay);
         playerHandler.SetCanClick(false);
         GenerateSequence();
 
         for (int i = 0; i < currentSequenceLength; i++){
             nextButton = buttons[currentSequence[i]];
-            yield return StartCoroutine(nextButton.PlayBlinkRoutine());
+            yield return StartCoroutine(nextButton.PlayBlinkRoutine(buttonSequenceActiveDuration, buttonSequenceCooldownDuration));
         }
+
+        StartCoroutine(PlayerResponseRoutine());
+    }
+
+    private IEnumerator PlayerResponseRoutine(){
+        nextIndexToCheck = 0;
+        playerClicks = 0;
+        playerHandler.SetCanClick(true);
+
+        while (playerClicks < currentSequenceLength){  yield return null; }
+
+        ActivateNextLight();
+        playerHandler.SetCanClick(false);
+        IncrementSequenceLength();
+        StartCoroutine(SequenceRoutine());
+    }
+
+    public void HandleClick(int buttonIndex){
+        playerClicks++;
+
+        if (currentSequence[nextIndexToCheck] == buttonIndex){
+            nextIndexToCheck++;
+        } else {
+            StopAllCoroutines();
+            playerHandler.SetCanType(true);
+            playerHandler.SetCanClick(false);
+        }
+    }
+
+    private void ActivateNextLight(){
+        lights[lightsOn].SetActive();
+        lightsOn++;
+    }
+
+    private void DeactivateLights(){
+        for(GameLight g: lights){
+            g.SetInactive();
+        }
+        lightsOn = 0;
+    }
+
+    private void IncrementSequenceLength(){
+        currentSequenceLength++;
     }
 
 }
