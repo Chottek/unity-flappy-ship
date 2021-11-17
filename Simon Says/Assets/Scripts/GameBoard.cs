@@ -16,8 +16,11 @@ public class GameBoard : MonoBehaviour {
     private int[] currentSequence;
     private int currentSequenceLength;
 
+    //[SerializeField]
+    //private List<GameButton> buttons;
+
     [SerializeField]
-    private List<GameButton> buttons;
+    private GameButton[] buttons;
 
     private PlayerHandler playerHandler;
 
@@ -27,8 +30,24 @@ public class GameBoard : MonoBehaviour {
         playerHandler.SetCanClick(true); //change to false later! <- state before pressing start 
         playerHandler.SetCanType(false); //change to true later!
 
-       
-        Debug.Log("Buttons size: " + buttons.Count);
+        buttons = GetComponentsInChildren<GameButton>();
+      
+        Debug.Log("Buttonz size:" + buttons.Length);
     }
+
+    private void Play(){
+       
+        
+
+    }
+
+    private void GenerateSequence(){
+        currentSequence = new int[currentSequenceLength];
+        for (int i = 0; i < currentSequenceLength; i++){
+           currentSequence[i] = Random.Range(0, buttons.Length);
+        }
+    }
+
+    
 
 }
