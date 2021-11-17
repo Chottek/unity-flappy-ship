@@ -22,6 +22,8 @@ public class GameBoard : MonoBehaviour {
     [SerializeField]
     private GameButton[] buttons;
 
+    private GameButton nextButton;
+
     private PlayerHandler playerHandler;
 
     void Awake(){
@@ -35,19 +37,32 @@ public class GameBoard : MonoBehaviour {
         Debug.Log("Buttonz size:" + buttons.Length);
     }
 
-    private void Play(){
-       
-        
-
+    private void Start() {
+        StartGame();
     }
 
     private void GenerateSequence(){
         currentSequence = new int[currentSequenceLength];
         for (int i = 0; i < currentSequenceLength; i++){
            currentSequence[i] = Random.Range(0, buttons.Length);
+           Debug.Log("Generated: " + i + " : " + currentSequence[i]);
         }
     }
 
-    
+    private void StartGame(){
+        currentSequenceLength = startSequenceLength;
+        StartCoroutine(PlaySequenceRoutine());
+    }
+
+    private IEnumerator PlaySequenceRoutine(){
+        yield return new WaitForSeconds(sequenceDelay);
+        playerHandler.SetCanClick(false);
+        GenerateSequence();
+
+        for (int i = 0; i < currentSequenceLength; i++){
+            nextButton = buttons[currentSequence[i]];
+            yield return StartCoroutine(nextButton.PlayBlinkRoutine());
+        }
+    }
 
 }
