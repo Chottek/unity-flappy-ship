@@ -33,9 +33,12 @@ public class GameBoard : MonoBehaviour {
     private PlayerHandler playerHandler;
 
     private Difficulty difficulty;
+    private GameMode gameMode;
 
     void Awake(){
         difficulty = Difficulty.Hard;
+        gameMode = GameMode.InGame;
+
         CheckDifficulty();
         playerHandler = GetComponent<PlayerHandler>();
 
@@ -104,6 +107,7 @@ public class GameBoard : MonoBehaviour {
         while (playerClicks < currentSequenceLength){  yield return null; }
 
         ActivateNextLight();
+        CheckLigtsInGame();
         playerHandler.SetCanClick(false);
         IncrementSequenceLength();
         StartCoroutine(SequenceRoutine());
@@ -122,7 +126,9 @@ public class GameBoard : MonoBehaviour {
     }
 
     private void ActivateNextLight(){
-        lights[lightsOn].SetActive();
+        if(lightsOn < 5){
+            lights[lightsOn].SetActive();
+        }
         lightsOn++;
     }
 
@@ -135,6 +141,28 @@ public class GameBoard : MonoBehaviour {
 
     private void IncrementSequenceLength(){
         currentSequenceLength++;
+    }
+
+    private void Proceed(){
+        switch(gameMode){
+            case GameMode.Arcade:{
+                //retry or exit
+                break;
+            }
+            case GameMode.InGame:{
+                //proceed
+                Debug.Log("Should go forward");
+                StopAllCoroutines();
+                //setScene - next gameScene or loadingScene
+                break;
+            }
+        }
+    }
+
+    private void CheckLigtsInGame(){
+        if(gameMode == GameMode.InGame && lightsOn == 5){
+            Proceed();
+        }
     }
 
 }
