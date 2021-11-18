@@ -11,7 +11,7 @@ public class GameBoard : MonoBehaviour {
     public int startSequenceLength = 1;
 
     [SerializeField]
-    public float sequenceDelay = 1f;
+    public float sequenceDelay = 0.5f;
 
     private int[] currentSequence;
     private int currentSequenceLength;
@@ -32,7 +32,11 @@ public class GameBoard : MonoBehaviour {
 
     private PlayerHandler playerHandler;
 
+    private Difficulty difficulty;
+
     void Awake(){
+        difficulty = Difficulty.Hard;
+        CheckDifficulty();
         playerHandler = GetComponent<PlayerHandler>();
 
         playerHandler.SetCanClick(true); //change to false later! <- state before pressing start 
@@ -40,6 +44,26 @@ public class GameBoard : MonoBehaviour {
 
         buttons = GetComponentsInChildren<GameButton>();
         lights = GetComponentsInChildren<GameLight>();
+    }
+
+    private void CheckDifficulty(){
+        switch(difficulty){
+            case Difficulty.Easy:{
+                buttonSequenceActiveDuration = 0.4f;
+                buttonSequenceCooldownDuration = 0.2f;
+                break;
+            }
+            case Difficulty.Medium:{
+                buttonSequenceActiveDuration = 0.3f;
+                buttonSequenceCooldownDuration = 0.1f;
+                break;
+            }
+            case Difficulty.Hard:{
+                buttonSequenceActiveDuration = 0.2f;
+                buttonSequenceCooldownDuration = 0.05f;
+                break;
+            }
+        }
     }
 
     private void Start() {
