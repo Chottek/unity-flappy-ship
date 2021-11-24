@@ -5,6 +5,12 @@ using UnityEngine;
 public class GameButton : MonoBehaviour {
 
     [SerializeField]
+    public AudioClip clickSound;
+
+    [SerializeField]
+    public AudioClip switchOn;
+
+    [SerializeField]
     public int index;
 
     [SerializeField]
@@ -20,14 +26,12 @@ public class GameButton : MonoBehaviour {
         gameBoard = GetComponentInParent<GameBoard>();
     }
 
-    void Update(){
-       
-    }
-
     public IEnumerator PlayBlinkRoutine(float active, float cooldown){
         SetActive();
+        SoundManager.PlaySound(switchOn);
         yield return new WaitForSeconds(active);
         SetInactive();
+        SoundManager.PlaySound(switchOn);
         yield return new WaitForSeconds(cooldown);
     }
 
@@ -40,6 +44,7 @@ public class GameButton : MonoBehaviour {
 
     public void PlayerClick(){
         StartCoroutine(PlayBlinkRoutine(0.1f, 0.1f));
+        SoundManager.PlaySound(clickSound);
         gameBoard.HandleClick(index);
     }
 
@@ -63,6 +68,4 @@ public class GameButton : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = inactiveColor;
     }
 
-   
-    
 }

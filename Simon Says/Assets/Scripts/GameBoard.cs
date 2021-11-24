@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameBoard : MonoBehaviour {
 
+    [SerializeField]
+    public AudioClip errorSound;
+
     private const string GRID_NAME = "ButtonGrid";
     private const int GRID_SIZE = 9;
 
@@ -82,7 +85,7 @@ public class GameBoard : MonoBehaviour {
 
     private void StartGame(){
         currentSequenceLength = startSequenceLength;
-        lightsOn = 0;
+        DeactivateLights();
         StartCoroutine(SequenceRoutine());
     }
 
@@ -119,9 +122,18 @@ public class GameBoard : MonoBehaviour {
         if (currentSequence[nextIndexToCheck] == buttonIndex){
             nextIndexToCheck++;
         } else {
+            SoundManager.PlaySound(errorSound);
+            SetAllLightsRed();
             StopAllCoroutines();
+            BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
+        }
+    }
+
+    private void BlinkButtonsRed(){
+        foreach(GameButton gb in buttons){
+            StartCoroutine(gb.PlayErrorRoutine());
         }
     }
 
@@ -139,6 +151,13 @@ public class GameBoard : MonoBehaviour {
         lightsOn = 0;
     }
 
+    private void SetAllLightsRed(){
+        foreach(GameLight g in lights){
+            g.SetWronglyActive();
+        }
+        lightsOn = 0;
+    }
+
     private void IncrementSequenceLength(){
         currentSequenceLength++;
     }
@@ -150,7 +169,6 @@ public class GameBoard : MonoBehaviour {
                 break;
             }
             case GameMode.InGame:{
-                //proceed
                 Debug.Log("Should go forward");
                 StopAllCoroutines();
                 //setScene - next gameScene or loadingScene

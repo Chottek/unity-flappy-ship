@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8368d55054c8048bfaae482beb912b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  errorSound: {fileID: 8300000, guid: a18c7b735af6f5a42a0c825582fa816b, type: 3}
   startSequenceLength: 1
   sequenceDelay: 1
   buttonSequenceActiveDuration: 0.3
@@ -781,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &781588827
@@ -927,6 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &845431701
@@ -1073,6 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &894573396
@@ -1315,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1003509464
@@ -1461,6 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1035627642
@@ -1607,6 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1323789303
@@ -1849,6 +1856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1850945333
@@ -1995,6 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1910380320
@@ -2141,6 +2150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58f91ee4d2848408ca6ba9925ce992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 66b9377aabae8984395650fe7196adaa, type: 3}
   index: 0
   gameBoard: {fileID: 0}
 --- !u!50 &1978008093
